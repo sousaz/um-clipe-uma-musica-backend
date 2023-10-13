@@ -4,7 +4,7 @@ const Routes = require("./routes/index.routes")
 const cors = require('cors')
 
 const server = express()
-const PORT = 3333;
+const PORT = process.env.PORT || 3333;
 
 (async () => {
     await db.sync(); // Sincroniza os modelos com o banco de dados
@@ -14,5 +14,9 @@ const PORT = 3333;
 server.use(express.json())
 server.use(cors())
 server.use('/api', Routes)
+
+server.get("/", (req, res) => {
+    return res.json("ola mundo")
+})
 
 server.listen(PORT, () => console.log("ta funcioanndo"))
